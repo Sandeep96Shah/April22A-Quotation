@@ -36,3 +36,28 @@ module.exports.createQuotation = async (req, res) => {
     });
   }
 };
+
+module.exports.getAllQuotations = async (req, res) => {
+  try{
+    // fetch the entire quotations data from Quotation model
+    // populate the user field by selecting only the name field
+    const quotations = await Quotation.find({}).populate({
+      path: 'user',
+      select: 'name',
+    });
+
+    return res.status(200).json({
+      message: "Successfully fetched all quotations form db!",
+      data: {
+        quotations: quotations,
+      }
+    })
+  }catch(error){
+    return res.status(500).json({
+      message: "Error while fetching the quotations details from db!",
+      data: {
+        error: error,
+      }
+    })
+  }
+}

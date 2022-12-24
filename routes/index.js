@@ -16,5 +16,7 @@ router.get('/user-details/:userId', userController.userDetails);
 
 router.post('/create-quotation', quotationController.createQuotation);
 
+router.get('/quotations', quotationController.getAllQuotations);
+
 //export the router
 module.exports = router;
